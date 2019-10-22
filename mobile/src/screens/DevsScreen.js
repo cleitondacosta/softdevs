@@ -1,20 +1,11 @@
 import React from 'react';
 import DevList from '../components/DevList';
+import useDevSample from '../hooks/useDevSample';
 import { Text, SafeAreaView, StyleSheet } from 'react-native';
 
 export default function DevsScreen({ navigation }) {
   const loggedCompanyName = 'company_name';
-  const devs = [{
-    name: "Cleiton da Costa",
-    username: "cleitondacosta",
-    bio: "User bio",
-    image: "https://avatars2.githubusercontent.com/u/19880317?v=4",
-    repositories: [{
-      name: "softdevs",
-      description: "Mobile application to hire software developers."
-    }],
-  }];
-
+  const devs = useDevSample();
 
   return (
     <SafeAreaView style={styles.container}>

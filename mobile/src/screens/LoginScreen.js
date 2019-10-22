@@ -14,13 +14,19 @@ export default function LoginScreen({ navigation }) {
 
       <TextInput 
         style={styles.loginInput} 
-        placeholder="Digite o Login" 
+        placeholder="Type the login" 
         placeholderTextColor="#bbb"
       />
 
       <TouchableOpacity style={styles.loginButton}>
         <Text style={styles.loginButtonText}>
-          Logar
+          Login as developer
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.loginButton}>
+        <Text style={styles.loginButtonText}>
+          Login as company
         </Text>
       </TouchableOpacity>
     </SafeAreaView>
@@ -52,6 +58,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     backgroundColor: '#111',
+    marginBottom: 10,
   },
   loginButtonText: {
     color: '#fff',

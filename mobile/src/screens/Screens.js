@@ -17,7 +17,11 @@ export default function Screens({ navigation }) {
       keyExtractor={item => item.title} 
       numColumns={2}
       renderItem={({item}) => (
-        <Screen name={item.title} navigation={navigation} />)
+        <Screen
+          name={item.title} 
+          navigation={navigation} 
+        />
+      )
       }
     />
   );

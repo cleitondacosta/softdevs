@@ -10,6 +10,7 @@ export default function DevList(props) {
         name={dev.name}
         username={dev.username}
         bio={dev.bio}
+        repositories={dev.repositories}
         navigation={props.navigation}
       />
     );

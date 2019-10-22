@@ -1,11 +1,12 @@
 import React from 'react';
-import Repository from '../components/Repository';
+import RepositoryList from '../components/RepositoryList';
 import useDev from '../hooks/useDev';
 import { 
   SafeAreaView,
   Text, 
   StyleSheet,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 
 export default function DevProfileScreen(props) {
@@ -17,7 +18,13 @@ export default function DevProfileScreen(props) {
       <Text style={styles.name}>{dev.name}</Text>
       <Text style={styles.username}>{dev.username}</Text>
 
-      <Repository repositories={dev.repositories} />
+      <TouchableOpacity style={styles.chatButton}>
+        <Text style={styles.chatButtonText}>
+          Chat
+        </Text>
+      </TouchableOpacity>
+
+      <RepositoryList repositories={dev.repositories} />
     </SafeAreaView>
   );
 }
@@ -43,5 +50,19 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     color: '#888',
-  }
+  },
+  chatButton: {
+    marginTop: 10,
+    height: 25,
+    width: 60,
+    alignSelf: 'center',
+    borderRadius: 10,
+    justifyContent: 'center',
+    backgroundColor: '#111',
+  },
+  chatButtonText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
 });

@@ -2,13 +2,29 @@ import React from 'react';
 import {
   View,
   Text,
+  StyleSheet,
 } from 'react-native';
 
 export default function Repository(props) {
   return (
-    <View>
-      <Text>{props.repositories[0].name}</Text>
-      <Text>{props.repositories[0].description}</Text>
+    <View style={styles.container}>
+      <Text style={styles.name}>
+        {props.repository.name}
+      </Text>
+      <Text>{props.repository.description}</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+  name: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  description: {
+
+  }
+});
