@@ -1,6 +1,6 @@
 import React from 'react';
 import RepositoryList from '../components/RepositoryList';
-import useDev from '../hooks/useDev';
+import useDevSample from '../hooks/useDevSample';
 import { 
   SafeAreaView,
   Text, 
@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 export default function DevProfileScreen(props) {
-  const dev = useDev(props.navigation);
+  const dev = useDevSample()[0];
 
   return (
     <SafeAreaView style={styles.container}>
