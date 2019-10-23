@@ -1,8 +1,8 @@
 import React from 'react';
 import {
   createAppContainer,
-  createSwitchNavigator
 } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import Screens from './screens/Screens';
 import LoginScreen from './screens/LoginScreen';
@@ -12,12 +12,12 @@ import LoggedDevScreen from './screens/LoggedDevScreen';
 import ChatScreen from './screens/ChatScreen';
 
 export default createAppContainer(
-  createSwitchNavigator({
+  createStackNavigator({
     Screens, 
     LoginScreen,
     DevsScreen,
     DevProfileScreen,
     LoggedDevScreen,
     ChatScreen
-  })
+  }, { headerMode: 'none' })
 );
