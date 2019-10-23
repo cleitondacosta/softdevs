@@ -1,6 +1,7 @@
 import React from 'react';
 import RepositoryList from '../components/RepositoryList';
 import useDevSample from '../hooks/useDevSample';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { 
   SafeAreaView,
   Text, 
@@ -20,7 +21,7 @@ export default function DevProfileScreen(props) {
 
       <TouchableOpacity style={styles.chatButton}>
         <Text style={styles.chatButtonText}>
-          Chat
+          <Icon name="ios-chatboxes" size={20} />
         </Text>
       </TouchableOpacity>
 
