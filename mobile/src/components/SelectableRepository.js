@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { View, CheckBox } from 'react-native';
+import { View, Switch } from 'react-native';
 import Repository from './Repository';
 
 export default function SelectableRepository(props) {
-  const [checkBoxValue, setCheckBoxValue] = useState(false);
+  const [SwitchValue, setSwitchValue] = useState(false);
 
   return (
     <View style={{flexDirection: 'row'}}>
-      <CheckBox 
+      <Switch 
         style={{alignSelf: 'center'}}
-        onValueChange={value => setCheckBoxValue(value)} 
-        value={checkBoxValue} 
+        onValueChange={value => setSwitchValue(value)} 
+        value={SwitchValue} 
       />
       <Repository repository={props.repository} />
     </View>
