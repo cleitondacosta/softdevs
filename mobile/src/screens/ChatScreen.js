@@ -1,4 +1,6 @@
 import React from 'react';
+import MessageList from '../components/MessageList';
+import useChatSample from '../hooks/useChatSample';
 import {
   SafeAreaView,
   View,
@@ -9,15 +11,11 @@ import {
 } from 'react-native';
 
 export default function ChatScreen() {
-  const chatHistory = null;
+  const chatHistory = useChatSample();
 
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <View style={styles.chatContainer}>
-        {chatHistory || (
-          <Text style={styles.emptyChat}>No messages</Text>
-        )}
-      </View>
+      <MessageList data={chatHistory} />
 
       <View style={styles.chatInputContainer}>
         <TextInput style={styles.chatTextInput} placeholder="Chat with user"/>
@@ -34,12 +32,6 @@ export default function ChatScreen() {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-  },
-  chatContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    borderBottomWidth: 2,
-    borderBottomColor: '#eee',
   },
   chatTextInput: {
     flex: 4,
