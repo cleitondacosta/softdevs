@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Message from './Message';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 
 export default function MessageList({ data }) {
+  const flatListRef = useRef(null);
+
   function renderMessage(messageData) {
     return <Message 
       text={messageData.text} 
@@ -14,6 +16,8 @@ export default function MessageList({ data }) {
   return (
     <FlatList
       style={styles.container}
+      ref={flatListRef}
+      onContentSizeChange={() => flatListRef.current.scrollToEnd()}
       data={data}
       renderItem={({item}) => renderMessage(item)}
       keyExtractor={(item, index) => `${index}`}

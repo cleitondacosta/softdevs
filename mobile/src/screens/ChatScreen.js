@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MessageList from '../components/MessageList';
 import useChatSample from '../hooks/useChatSample';
@@ -11,15 +11,33 @@ import {
 } from 'react-native';
 
 export default function ChatScreen() {
-  const chatHistory = useChatSample();
+  const [chatInputValue, setChatInputValue] = useState('');
+  const [chatHistory, setChatHistory] = useState(useChatSample());
+
+  function handleSend() {
+    const newMessage = { 
+      text: chatInputValue,
+      date: 'date',
+      alignSelf: 'flex-end',
+    };
+
+    setChatHistory([...chatHistory, newMessage]);
+    setChatInputValue('');
+  }
 
   return (
     <SafeAreaView style={styles.rootContainer}>
       <MessageList data={chatHistory} />
 
       <View style={styles.chatInputContainer}>
-        <TextInput style={styles.chatTextInput} placeholder="Chat"/>
-        <TouchableOpacity style={styles.chatButton}>
+        <TextInput 
+          value={chatInputValue}
+          onChangeText={text => setChatInputValue(text)}
+          style={styles.chatTextInput} 
+          placeholder="Chat"
+        />
+
+        <TouchableOpacity style={styles.chatButton} onPress={handleSend}>
           <Icon name="md-send" color="#fff" size={32} />
         </TouchableOpacity>
       </View>
