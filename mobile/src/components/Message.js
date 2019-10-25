@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function Message({ text, date, align }) {
+export default function Message({ text, date, alignSelf }) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { alignSelf }]}>
       <Text style={styles.text}>
         {text}
       </Text>
@@ -18,6 +18,7 @@ export default function Message({ text, date, align }) {
 const styles = StyleSheet.create({
   container: {
     maxWidth: "80%",
+    minWidth: "80%",
     backgroundColor: "#fff",
     marginBottom: 6,
     borderRadius: 6,
@@ -30,6 +31,6 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 13,
     fontStyle: 'italic',
-    color: '#666',
+    color: '#aaa',
   },
 });

@@ -7,7 +7,7 @@ export default function MessageList({ data }) {
     return <Message 
       text={messageData.text} 
       date={messageData.date} 
-      align={messageData.align} 
+      alignSelf={messageData.alignSelf} 
     />
   }
 

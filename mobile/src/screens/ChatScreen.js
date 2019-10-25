@@ -1,10 +1,10 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/Ionicons';
 import MessageList from '../components/MessageList';
 import useChatSample from '../hooks/useChatSample';
 import {
   SafeAreaView,
   View,
-  Text,
   TouchableOpacity,
   TextInput,
   StyleSheet
@@ -18,13 +18,12 @@ export default function ChatScreen() {
       <MessageList data={chatHistory} />
 
       <View style={styles.chatInputContainer}>
-        <TextInput style={styles.chatTextInput} placeholder="Chat with user"/>
+        <TextInput style={styles.chatTextInput} placeholder="Chat"/>
         <TouchableOpacity style={styles.chatButton}>
-          <Text style={styles.chatButtonText}>
-            Send
-          </Text>
+          <Icon name="md-send" color="#fff" size={32} />
         </TouchableOpacity>
       </View>
+
     </SafeAreaView>
   );
 }
@@ -36,6 +35,8 @@ const styles = StyleSheet.create({
   chatTextInput: {
     flex: 4,
     padding: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
   },
   chatInputContainer: {
     flexDirection: 'row', 
@@ -43,7 +44,8 @@ const styles = StyleSheet.create({
   chatButton: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'black',
+    alignItems: 'center',
+    backgroundColor: '#666',
   },
   chatButtonText: {
     color: '#fff',

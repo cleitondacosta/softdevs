@@ -10,11 +10,11 @@ const longMessage = `
 
 export default function useChatSample() {
   return [
-    { text: 'Message 1', date: '02/09/1998' },
-    { text: 'Message 2', date: '02/09/1998' },
-    { text: 'Message 3', date: '02/09/1998' },
-    { text: 'Message 4', date: '02/09/1998' },
-    { text: 'Message 5', date: '02/09/1998' },
-    { text: longMessage, date: '02/09/1998' },
+    { text: 'Message 1', date: '02/09/1998', alignSelf: 'flex-start' },
+    { text: 'Message 2', date: '02/09/1998', alignSelf: 'flex-start' },
+    { text: 'Message 3', date: '02/09/1998', alignSelf: 'flex-end' },
+    { text: 'Message 4', date: '02/09/1998', alignSelf: 'flex-start' },
+    { text: 'Message 5', date: '02/09/1998', alignSelf: 'flex-start' },
+    { text: longMessage, date: '02/09/1998', alignSelf: 'flex-start' },
   ];
 }
