@@ -74,8 +74,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  emptyChat: {
-    color: '#666',
-    textAlign: 'center',
-  },
 });
