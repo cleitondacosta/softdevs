@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ChatHeader from '../components/ChatHeader';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MessageList from '../components/MessageList';
 import useDevSample from '../hooks/useDevSample';
@@ -6,10 +7,8 @@ import useChatSample from '../hooks/useChatSample';
 import {
   SafeAreaView,
   View,
-  Text,
   TouchableOpacity,
   TextInput,
-  Image,
   StyleSheet
 } from 'react-native';
 
@@ -31,19 +30,7 @@ export default function ChatScreen() {
 
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <View style={styles.header}>
-        <Image style={styles.headerImage} source={{uri: dev.image}} />
-
-        <View>
-          <Text style={styles.devName}>{dev.name}</Text>
-          <View style={styles.horizontalContainer}>
-            <Text style={styles.devUsername}> {dev.username}</Text>
-            <Icon style={styles.githubLogo} name="logo-github" size={16} />
-          </View>
-        </View>
-
-      </View>
-
+      <ChatHeader recipient={dev} />
       <MessageList data={chatHistory} />
 
       <View style={styles.chatInputContainer}>
@@ -91,34 +78,4 @@ const styles = StyleSheet.create({
     color: '#666',
     textAlign: 'center',
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 5,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-  },
-  headerImage: {
-    height: 50,
-    width: 50,
-    borderRadius: 10,
-    marginRight: 10,
-    borderWidth: 1.5,
-    borderColor: 'lightgreen',
-  },
-  devName: {
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  devUsername: {
-    color: '#999',
-    fontStyle: 'italic',
-  },
-  githubLogo: {
-    marginLeft: 1,
-  },
-  horizontalContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  }
 });
