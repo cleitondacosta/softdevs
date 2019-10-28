@@ -1,26 +1,30 @@
 import React from 'react';
-import styled from 'styled-components/native';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 export default function Screen({ name, navigation }) {
   return (
-    <ScreenButton onPress={() => navigation.navigate(name)}>
-      <ButtonText>
+    <TouchableOpacity 
+      style={styles.button}
+      onPress={() => navigation.navigate(name)}
+    >
+      <Text style={styles.buttonText}>
         {name}
-      </ButtonText>
-    </ScreenButton>
+      </Text>
+    </TouchableOpacity>
   );
 }
 
-const ScreenButton = styled.TouchableOpacity`
-  flex: 1;
-  height: 150px;
-  margin: 5px;
-  background: #ddd;
-  justify-content: center;
-`;
-
-const ButtonText = styled.Text`
-  font-weight: bold;
-  font-size: 18px;
-  text-align: center;
-`;
+const styles = StyleSheet.create({
+  button: {
+    flex: 1,
+    height: 150,
+    margin: 5,
+    backgroundColor: '#ddd',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    textAlign: 'center',
+  }
+})
