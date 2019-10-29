@@ -13,13 +13,17 @@ import {
 export default function DevProfileScreen(props) {
   const dev = useDevSample()[0];
 
+  function handlePress() {
+    props.navigation.navigate('ChatScreen');
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Image style={styles.image} source={{uri: dev.image}} />
       <Text style={styles.name}>{dev.name}</Text>
       <Text style={styles.username}>{dev.username}</Text>
 
-      <TouchableOpacity style={styles.chatButton}>
+      <TouchableOpacity onPress={handlePress} style={styles.chatButton}>
         <Text style={styles.chatButtonText}>
           <Icon name="ios-chatboxes" size={20} />
         </Text>
