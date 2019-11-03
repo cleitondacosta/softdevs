@@ -1,21 +1,31 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/Ionicons';
 import useDevSample from '../hooks/useDevSample';
 import SelectableRepositoryList from '../components/SelectableRepositoryList';
 import {
   SafeAreaView,
   View,
   Text,
-  Image,
+  ImageBackground,
+  TouchableOpacity,
   StyleSheet
 } from 'react-native';
 
-export default function LoggedDevScreen() {
+export default function LoggedDevScreen({ navigation }) {
   const dev = useDevSample()[0];
 
   return (
     <SafeAreaView style={styles.rootContainer}>
       <View style={styles.userInfoContainer}>
-        <Image style={styles.image} source={{uri: dev.image}} />
+        <ImageBackground
+          style={styles.imageOuterContainer} 
+          imageStyle={styles.image}
+          source={{uri: dev.image}}
+        >
+          <TouchableOpacity onPress={() => navigation.navigate('ChatScreen')}>
+            <Icon style={styles.chatIcon} name="ios-chatboxes" size={25} />
+          </TouchableOpacity>
+        </ImageBackground>
 
         <View>
           <Text style={styles.name}>{dev.name}</Text>
@@ -41,10 +51,13 @@ const styles = StyleSheet.create({
   userInfoContainer: {
     flexDirection: 'row',
   },
-  image: {
+  imageOuterContainer: {
+    flexDirection: 'column-reverse',
     height: 150,
     width: 150,
     marginRight: 15,
+  },
+  image: {
     borderRadius: 20,
   },
   name: {
@@ -59,10 +72,18 @@ const styles = StyleSheet.create({
   bio: {
 
   },
+  chatIcon: {
+    alignSelf: 'flex-end',    
+    margin: 10,
+    color: '#fff',
+    backgroundColor: '#000',
+    borderRadius: 5,
+    padding: 5,
+  },
   dataAdvice: {
     fontStyle: 'italic',
     textAlign: 'center',
     color: '#666',
-    marginTop: 15,
+    marginTop: 25,
   }
 });
