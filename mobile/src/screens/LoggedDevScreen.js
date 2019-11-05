@@ -22,7 +22,7 @@ export default function LoggedDevScreen({ navigation }) {
           imageStyle={styles.image}
           source={{uri: dev.image}}
         >
-          <TouchableOpacity onPress={() => navigation.navigate('ChatScreen')}>
+          <TouchableOpacity onPress={() => navigation.navigate('ReceivedMessagesScreen')}>
             <Icon style={styles.chatIcon} name="ios-chatboxes" size={25} />
           </TouchableOpacity>
         </ImageBackground>
