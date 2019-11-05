@@ -10,10 +10,14 @@ import {
 export default function ReceivedMessage({navigation, sender, messagePreview, hasNew}) {
   function limitString(str, max) {
    return str.slice(0, max) + '...';
- }
+  }
+
+  function handlePress() {
+    navigation.navigate('ChatScreen');
+  }
   
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity onPress={handlePress} style={styles.container}>
       <Text style={styles.sender}>{sender}</Text>
       <View style={styles.previewContainer}>
         {hasNew && (

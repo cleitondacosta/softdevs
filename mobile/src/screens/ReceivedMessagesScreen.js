@@ -1,23 +1,38 @@
 import React from 'react';
-import ReceivedMessage from '../components/ReceivedMessage';
+import useReceivedMessagesSample from '../hooks/useReceivedMessagesSample';
+import ReceivedMessageList from '../components/ReceivedMessageList';
 import { 
   View,
   Text,
+  StyleSheet
 } from 'react-native';
 
 export default function ReceivedMessagesScreen({ navigation }) {
+  const messages = useReceivedMessagesSample();
+
   return (
     <View>
-      <ReceivedMessage 
-        sender="Comapany Name" 
-        messagePreview="Olá! Nós somos a Company Name, empresa [...]"
-      />
+      <View style={styles.header}>
+        <Text style={styles.name}>Messages for you,</Text>
+        <Text style={styles.username}>username</Text>
+      </View>
 
-      <ReceivedMessage 
-        sender="Comapany Name" 
-        messagePreview="Olá! Nós somos a Company Name, empresa [...]"
-        hasNew={true}
-      />
+      <ReceivedMessageList messages={messages} navigation={navigation} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  header: {
+    alignItems: 'center',
+    padding: 10,
+    elevation: 2,
+  },
+  name: {
+    fontSize: 18,
+  },
+  username: {
+    fontStyle: 'italic',
+    fontSize: 15,
+  },
+});
