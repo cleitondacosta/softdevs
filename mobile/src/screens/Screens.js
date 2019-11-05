@@ -9,6 +9,7 @@ export default function Screens({ navigation }) {
     {title: "DevProfileScreen"},
     {title: "LoggedDevScreen"},
     {title: "ChatScreen"},
+    {title: "ReceivedMessagesScreen"},
   ];
 
   return (
