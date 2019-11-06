@@ -30,7 +30,7 @@ export default function ChatScreen() {
 
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <ChatHeader recipient={dev} />
+      <ChatHeader receiver={dev} />
       <MessageList data={chatHistory} />
 
       <View style={styles.chatInputContainer}>

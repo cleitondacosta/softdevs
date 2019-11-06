@@ -1,17 +1,15 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-export default function ChatHeader({ sender, recipient }) {
+export default function ChatHeader({ receiver }) {
   return (
     <View style={styles.header}>
-      <Image style={styles.headerImage} source={{uri: recipient.image}} />
+      <Image style={styles.headerImage} source={{uri: receiver.image}} />
 
       <View>
-        <Text style={styles.devName}>{recipient.name}</Text>
+        <Text style={styles.name}>{receiver.name}</Text>
         <View style={styles.horizontalContainer}>
-          <Text style={styles.devUsername}> {recipient.username}</Text>
-          <Icon style={styles.githubLogo} name="logo-github" size={16} />
+          <Text style={styles.username}> {receiver.username}</Text>
         </View>
       </View>
 
@@ -35,11 +33,11 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: 'lightgreen',
   },
-  devName: {
+  name: {
     fontWeight: 'bold',
     fontSize: 16,
   },
-  devUsername: {
+  username: {
     color: '#999',
     fontStyle: 'italic',
   },
