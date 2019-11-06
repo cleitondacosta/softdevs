@@ -1,0 +1,23 @@
+import React from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
+
+export default function ChatHeader({ receiverName }) {
+  return (
+    <View style={styles.header}>
+        <Text>Chatting with</Text>
+        <Text style={styles.name}>{receiverName}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  header: {
+    alignItems: 'center',
+    padding: 5,
+    elevation: 5,
+  },
+  name: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});
