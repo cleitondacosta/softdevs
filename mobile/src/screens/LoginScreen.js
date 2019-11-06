@@ -8,6 +8,14 @@ import {
 } from 'react-native';
 
 export default function LoginScreen({ navigation }) {
+  function handleLoginAsDev() {
+    navigation.navigate('LoggedDevScreen');
+  }
+
+  function handleLoginAsCompany() {
+    navigation.navigate('DevsScreen');
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.logo}>SOFTDEVS</Text>
@@ -18,13 +26,19 @@ export default function LoginScreen({ navigation }) {
         placeholderTextColor="#bbb"
       />
 
-      <TouchableOpacity style={styles.loginButton}>
+      <TouchableOpacity 
+        style={styles.loginButton} 
+        onPress={handleLoginAsDev}
+      >
         <Text style={styles.loginButtonText}>
           Login as developer
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginButton}>
+      <TouchableOpacity 
+        style={styles.loginButton} 
+        onPress={handleLoginAsCompany}
+      >
         <Text style={styles.loginButtonText}>
           Login as company
         </Text>
