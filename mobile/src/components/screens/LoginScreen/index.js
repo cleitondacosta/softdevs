@@ -22,7 +22,7 @@ export default function LoginScreen({ navigation }) {
 
       <TextInput 
         style={styles.loginInput} 
-        placeholder="Type the login" 
+        placeholder="Enter the login" 
         placeholderTextColor="#bbb"
       />
 
