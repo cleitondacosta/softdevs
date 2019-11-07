@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import useRepos from '../../../hooks/useRepos';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SelectableRepositoryList from './SelectableRepositoryList';
-import { getRepos } from '../../../services/githubUserUtils';
+
 import {
   SafeAreaView,
   Alert,
@@ -14,21 +15,9 @@ import {
 
 export default function LoggedDevScreen({ navigation }) {
   const dev = navigation.getParam('dev', undefined);
-  const [repositories, setRepositories] = useState([]);
+  const { repositories, repoError } = useRepos(dev.login);
 
-  useEffect(() => {
-    async function fetchRepositories() {
-      const repos = await getRepos(dev.login);
-
-      if(repos)
-        setRepositories(repos);
-      else
-        Alert.alert('Error', `Could not fetch repositories for ${dev.login}`);
-    }
-
-    fetchRepositories();
-  }, []);
-
+  console.log(repositories);
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -54,7 +43,11 @@ export default function LoggedDevScreen({ navigation }) {
         Data taken from github.
       </Text>
 
-      <SelectableRepositoryList repositories={repositories} />
+      {repoError 
+        ? <Text style={styles.repoError}>Error: {repoError}</Text>
+        : <SelectableRepositoryList repositories={repositories} />
+      }
+
     </SafeAreaView>
   );
 }
@@ -98,5 +91,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#666',
     marginTop: 25,
+  },
+  repoError: {
+    textAlign: 'center',
+    color: '#d9534f'
   }
 });
