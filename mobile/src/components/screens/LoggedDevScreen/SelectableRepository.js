@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Switch } from 'react-native';
-import Repository from './Repository';
+import Repository from '../../Repository';
 
 export default function SelectableRepository(props) {
   const [SwitchValue, setSwitchValue] = useState(false);

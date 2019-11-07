@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import useDevSample from '../hooks/useDevSample';
-import SelectableRepositoryList from '../components/SelectableRepositoryList';
+import useDevSample from '../../../hooks/useDevSample';
+import SelectableRepositoryList from './SelectableRepositoryList';
 import {
   SafeAreaView,
   View,
@@ -30,7 +30,7 @@ export default function LoggedDevScreen({ navigation }) {
         <View>
           <Text style={styles.name}>{dev.name}</Text>
           <Text style={styles.username}>{dev.username}</Text>
-          <Text style={styles.bio}>{dev.bio}</Text>
+          <Text>{dev.bio}</Text>
         </View>
       </View>
 
@@ -68,9 +68,6 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     color: '#666',
     marginBottom: 10,
-  },
-  bio: {
-
   },
   chatIcon: {
     alignSelf: 'flex-end',    

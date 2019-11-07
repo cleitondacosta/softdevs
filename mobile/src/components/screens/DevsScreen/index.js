@@ -1,6 +1,6 @@
 import React from 'react';
-import DevList from '../components/DevList';
-import useDevSample from '../hooks/useDevSample';
+import DevList from './DevList';
+import useDevSample from '../../../hooks/useDevSample';
 import { Text, SafeAreaView, StyleSheet } from 'react-native';
 
 export default function DevsScreen({ navigation }) {

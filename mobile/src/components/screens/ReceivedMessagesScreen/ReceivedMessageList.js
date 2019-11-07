@@ -1,5 +1,5 @@
 import React from 'react';
-import ReceivedMessage from '../components/ReceivedMessage';
+import ReceivedMessage from './ReceivedMessage';
 import { FlatList } from 'react-native';
 
 export default function ReceivedMessageList({navigation, messages}) {

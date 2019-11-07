@@ -1,6 +1,6 @@
 import React from 'react';
-import useReceivedMessagesSample from '../hooks/useReceivedMessagesSample';
-import ReceivedMessageList from '../components/ReceivedMessageList';
+import useReceivedMessagesSample from '../../../hooks/useReceivedMessagesSample';
+import ReceivedMessageList from './ReceivedMessageList';
 import { 
   View,
   Text,

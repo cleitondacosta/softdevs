@@ -1,13 +1,13 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import Screens from './screens/Screens';
-import LoginScreen from './screens/LoginScreen';
-import DevsScreen from './screens/DevsScreen';
-import DevProfileScreen from './screens/DevProfileScreen';
-import LoggedDevScreen from './screens/LoggedDevScreen';
-import ChatScreen from './screens/ChatScreen';
-import ReceivedMessagesScreen from './screens/ReceivedMessagesScreen';
+import Screens from './components/screens/Screens';
+import LoginScreen from './components/screens/LoginScreen';
+import DevsScreen from './components/screens/DevsScreen';
+import DevProfileScreen from './components/screens/DevProfileScreen';
+import LoggedDevScreen from './components/screens/LoggedDevScreen';
+import ChatScreen from './components/screens/ChatScreen';
+import ReceivedMessagesScreen from './components/screens/ReceivedMessagesScreen';
 
 export default createAppContainer(
   createStackNavigator({

@@ -1,6 +1,6 @@
 import React from 'react';
-import RepositoryList from '../components/RepositoryList';
-import useDevSample from '../hooks/useDevSample';
+import RepositoryList from './RepositoryList';
+import useDevSample from '../../../hooks/useDevSample';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { 
   SafeAreaView,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-import Repository from './Repository';
+import Repository from '../../Repository';
 
 export default function RepositoryList({ repositories }) {
   return (

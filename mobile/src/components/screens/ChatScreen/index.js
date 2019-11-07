@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import ChatHeader from '../components/ChatHeader';
 import Icon from 'react-native-vector-icons/Ionicons';
-import MessageList from '../components/MessageList';
-import useDevSample from '../hooks/useDevSample';
-import useChatSample from '../hooks/useChatSample';
+import ChatHeader from './ChatHeader';
+import MessageList from './MessageList';
+import useDevSample from '../../../hooks/useDevSample';
+import useChatSample from '../../../hooks/useChatSample';
 import {
   SafeAreaView,
   View,

@@ -1,5 +1,5 @@
 import React from 'react';
-import Screen from '../components/Screen';
+import Screen from './Screen';
 import { FlatList } from 'react-native';
 
 export default function Screens({ navigation }) {
@@ -18,12 +18,8 @@ export default function Screens({ navigation }) {
       keyExtractor={item => item.title} 
       numColumns={2}
       renderItem={({item}) => (
-        <Screen
-          name={item.title} 
-          navigation={navigation} 
-        />
-      )
-      }
+        <Screen name={item.title} navigation={navigation} />
+      )}
     />
   );
 }
