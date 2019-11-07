@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Text, 
   TextInput, 
   SafeAreaView,
   StyleSheet,
+  Alert,
   TouchableOpacity,
 } from 'react-native';
+import { getUser } from '../../../services/githubUserUtils';
 
 export default function LoginScreen({ navigation }) {
-  function handleLoginAsDev() {
-    navigation.navigate('LoggedDevScreen');
+  const [login, setLogin] = useState('');
+
+  async function handleLoginAsDev() {
+    const user = await getUser(login);
+
+    if(user)
+      navigation.navigate('LoggedDevScreen', { dev: user });
+    else
+      Alert.alert('Error', `Could not found "${login}"`);
   }
 
-  function handleLoginAsCompany() {
+  async function handleLoginAsCompany() {
     navigation.navigate('DevsScreen');
   }
 
@@ -22,6 +31,8 @@ export default function LoginScreen({ navigation }) {
 
       <TextInput 
         style={styles.loginInput} 
+        value={login}
+        onChangeText={text => setLogin(text)}
         placeholder="Enter the login" 
         placeholderTextColor="#bbb"
       />

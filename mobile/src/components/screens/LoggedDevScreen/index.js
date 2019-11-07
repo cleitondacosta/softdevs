@@ -1,6 +1,5 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import useDevSample from '../../../hooks/useDevSample';
 import SelectableRepositoryList from './SelectableRepositoryList';
 import {
   SafeAreaView,
@@ -12,7 +11,7 @@ import {
 } from 'react-native';
 
 export default function LoggedDevScreen({ navigation }) {
-  const dev = useDevSample()[0];
+  const dev = navigation.getParam('dev', undefined);
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -20,7 +19,7 @@ export default function LoggedDevScreen({ navigation }) {
         <ImageBackground
           style={styles.imageOuterContainer} 
           imageStyle={styles.image}
-          source={{uri: dev.image}}
+          source={{uri: dev.avatar_url}}
         >
           <TouchableOpacity onPress={() => navigation.navigate('ReceivedMessagesScreen')}>
             <Icon style={styles.chatIcon} name="ios-chatboxes" size={25} />
@@ -29,8 +28,8 @@ export default function LoggedDevScreen({ navigation }) {
 
         <View>
           <Text style={styles.name}>{dev.name}</Text>
-          <Text style={styles.username}>{dev.username}</Text>
-          <Text>{dev.bio}</Text>
+          <Text style={styles.username}>{dev.login}</Text>
+          <Text>{dev.bio || "No bio provided."}</Text>
         </View>
       </View>
 
