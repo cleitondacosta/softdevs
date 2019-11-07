@@ -7,7 +7,7 @@ export default function RepositoryList({ repositories }) {
     <FlatList style={styles.container}
       data={repositories}
       renderItem={(({item}) => <SelectableRepository repository={item}/>)}
-      keyExtractor={(item) => item.name}
+      keyExtractor={(item) => item.id.toString()}
     />
   );
 }

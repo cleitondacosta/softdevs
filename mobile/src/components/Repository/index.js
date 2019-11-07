@@ -5,13 +5,13 @@ import {
   StyleSheet,
 } from 'react-native';
 
-export default function Repository(props) {
+export default function Repository({ repository }) {
   return (
     <View style={styles.container}>
       <Text style={styles.name}>
-        {props.repository.name}
+        {repository.name}
       </Text>
-      <Text>{props.repository.description}</Text>
+      <Text>{repository.description}</Text>
     </View>
   );
 }

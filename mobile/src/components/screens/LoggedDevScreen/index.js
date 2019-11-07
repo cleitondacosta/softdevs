@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SelectableRepositoryList from './SelectableRepositoryList';
+import { getRepos } from '../../../services/githubUserUtils';
 import {
   SafeAreaView,
+  Alert,
   View,
   Text,
   ImageBackground,
@@ -12,6 +14,21 @@ import {
 
 export default function LoggedDevScreen({ navigation }) {
   const dev = navigation.getParam('dev', undefined);
+  const [repositories, setRepositories] = useState([]);
+
+  useEffect(() => {
+    async function fetchRepositories() {
+      const repos = await getRepos(dev.login);
+
+      if(repos)
+        setRepositories(repos);
+      else
+        Alert.alert('Error', `Could not fetch repositories for ${dev.login}`);
+    }
+
+    fetchRepositories();
+  }, []);
+
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -37,7 +54,7 @@ export default function LoggedDevScreen({ navigation }) {
         Data taken from github.
       </Text>
 
-      <SelectableRepositoryList repositories={dev.repositories} />
+      <SelectableRepositoryList repositories={repositories} />
     </SafeAreaView>
   );
 }
