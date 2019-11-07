@@ -11,7 +11,7 @@ export default function Repository({ repository }) {
       <Text style={styles.name}>
         {repository.name}
       </Text>
-      <Text>{repository.description}</Text>
+      <Text>{repository.description || "No description provided."}</Text>
     </View>
   );
 }
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   name: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
   },
   description: {

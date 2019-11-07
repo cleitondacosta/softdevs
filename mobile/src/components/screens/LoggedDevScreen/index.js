@@ -5,7 +5,6 @@ import SelectableRepositoryList from './SelectableRepositoryList';
 
 import {
   SafeAreaView,
-  Alert,
   View,
   Text,
   ImageBackground,
@@ -16,8 +15,6 @@ import {
 export default function LoggedDevScreen({ navigation }) {
   const dev = navigation.getParam('dev', undefined);
   const { repositories, repoError } = useRepos(dev.login);
-
-  console.log(repositories);
 
   return (
     <SafeAreaView style={styles.rootContainer}>
