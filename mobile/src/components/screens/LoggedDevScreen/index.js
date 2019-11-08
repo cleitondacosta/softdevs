@@ -2,6 +2,9 @@ import React from 'react';
 import useRepos from '../../../hooks/useRepos';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SelectableRepositoryList from './SelectableRepositoryList';
+import ErrorText from '../../ErrorText';
+import FlexView from '../../FlexView';
+import BlurredText from '../../BlurredText';
 
 import {
   SafeAreaView,
@@ -31,17 +34,17 @@ export default function LoggedDevScreen({ navigation }) {
 
         <View>
           <Text style={styles.name}>{dev.name}</Text>
-          <Text style={styles.username}>{dev.login}</Text>
+          <BlurredText style={styles.username}>{dev.login}</BlurredText>
           <Text>{dev.bio || "No bio provided."}</Text>
         </View>
       </View>
 
-      <Text style={styles.dataAdvice}>
+      <BlurredText style={styles.dataAdvice}>
         Data taken from github.
-      </Text>
+      </BlurredText>
 
       {repoError 
-        ? <Text style={styles.repoError}>Error: {repoError}</Text>
+        ? <FlexView><ErrorText>Error: {repoError}</ErrorText></FlexView>
         : <SelectableRepositoryList repositories={repositories} />
       }
 
@@ -71,8 +74,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   username: {
-    fontStyle: 'italic',
-    color: '#666',
     marginBottom: 10,
   },
   chatIcon: {
@@ -84,13 +85,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   dataAdvice: {
-    fontStyle: 'italic',
     textAlign: 'center',
-    color: '#666',
     marginTop: 25,
   },
-  repoError: {
-    textAlign: 'center',
-    color: '#d9534f'
-  }
 });
