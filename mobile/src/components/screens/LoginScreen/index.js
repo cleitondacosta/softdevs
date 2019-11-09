@@ -7,6 +7,7 @@ import {
   Alert,
   TouchableOpacity,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { getUser } from '../../../services/githubUserUtils';
 
 export default function LoginScreen({ navigation }) {
@@ -15,10 +16,17 @@ export default function LoginScreen({ navigation }) {
   async function handleLoginAsDev() {
     const user = await getUser(login);
 
-    if(user)
+    if(user) {
+      await AsyncStorage.setItem('loggedUser', JSON.stringify({
+        isDev: true, 
+        user
+      }));
+
       navigation.navigate('LoggedDevScreen', { dev: user });
-    else
+    }
+    else {
       Alert.alert('Error', `Could not found "${login}"`);
+    }
   }
 
   async function handleLoginAsCompany() {

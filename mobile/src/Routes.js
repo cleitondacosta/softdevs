@@ -1,6 +1,7 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
+import AuthLoadingScreen from './components/screens/AuthLoadingScreen';
 import LoginScreen from './components/screens/LoginScreen';
 import DevsScreen from './components/screens/DevsScreen';
 import DevProfileScreen from './components/screens/DevProfileScreen';
@@ -25,6 +26,7 @@ const companyStack = createStackNavigator({
 
 export default createAppContainer(
   createSwitchNavigator({
+    AuthLoadingScreen,
     LoginScreen,
     devStack,
     companyStack,
