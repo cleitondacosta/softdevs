@@ -2,6 +2,7 @@ import React from 'react';
 import RepositoryList from './RepositoryList';
 import useDevSample from '../../../hooks/useDevSample';
 import Icon from 'react-native-vector-icons/Ionicons';
+import GreyText from '../../GreyText';
 import { 
   SafeAreaView,
   Text, 
@@ -21,7 +22,7 @@ export default function DevProfileScreen(props) {
     <SafeAreaView style={styles.container}>
       <Image style={styles.image} source={{uri: dev.image}} />
       <Text style={styles.name}>{dev.name}</Text>
-      <Text style={styles.username}>{dev.username}</Text>
+      <GreyText style={styles.username}>{dev.username}</GreyText>
 
       <TouchableOpacity onPress={handlePress} style={styles.chatButton}>
         <Text style={styles.chatButtonText}>
@@ -53,8 +54,6 @@ const styles = StyleSheet.create({
   },
   username: {
     textAlign: 'center',
-    fontSize: 14,
-    color: '#888',
   },
   chatButton: {
     marginTop: 10,

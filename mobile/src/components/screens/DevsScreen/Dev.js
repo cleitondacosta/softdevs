@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import GreyText from '../../GreyText';
 
 export default function Dev(props) {
   function handlePress() {
@@ -14,7 +15,7 @@ export default function Dev(props) {
           {props.name} ({props.username})
         </Text>
 
-        <Text style={styles.userBio}>{props.bio}</Text>
+        <GreyText>{props.bio}</GreyText>
       </View>
     </TouchableOpacity>
   );
@@ -34,7 +35,4 @@ const styles = StyleSheet.create({
   userName: {
     fontWeight: 'bold',
   },
-  userBio: {
-    color: "#555",
-  }
 });

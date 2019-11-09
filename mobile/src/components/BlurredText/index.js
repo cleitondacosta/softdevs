@@ -7,7 +7,7 @@ export default function BlurredText({ children, style }) {
 
 const styles = StyleSheet.create({
   text: {
-    color: '#666',
+    color: '#999',
     fontStyle: 'italic',
   },
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
+import GreyText from '../../GreyText';
 import {
   View,
   Text,
@@ -23,9 +24,9 @@ export default function ReceivedMessage({navigation, sender, messagePreview, has
         {hasNew && (
           <Icon style={styles.newMessageIcon} name="md-alert" size={14} />
         )}
-        <Text style={[styles.messagePreview, hasNew && styles.newMessagePreview]}>
+        <GreyText style={hasNew && styles.newMessagePreview}>
           {limitString(messagePreview, 30)}
-        </Text>
+        </GreyText>
       </View>
     </TouchableOpacity>
   );
@@ -48,11 +49,9 @@ const styles = StyleSheet.create({
     color: '#5cb85c',
     marginRight: 5,
   },
-  messagePreview: {
-    color: '#999',
-  },
   newMessagePreview: {
     color: '#000',
     fontWeight: 'bold',
+    fontFamily: 'Roboto',
   }
 });

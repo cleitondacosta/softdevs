@@ -4,11 +4,9 @@ import { View, Text, StyleSheet } from 'react-native';
 export default function ChatHeader({ receiverName, senderName }) {
   return (
     <View style={styles.header}>
+        <Text style={styles.name}>{senderName}</Text>
         <Text>
-          Logged as: <Text style={styles.name}>{senderName}</Text>
-        </Text>
-        <Text>
-          Chatting with: <Text style={styles.name}>{receiverName}</Text>
+          chatting with: <Text style={styles.name}>{receiverName}</Text>
         </Text>
     </View>
   );
@@ -23,7 +21,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: 'bold',
-    fontStyle: 'italic',
     fontSize: 16,
+    fontFamily: 'Roboto',
   },
 });
