@@ -1,18 +1,17 @@
 import React from 'react';
 import useRepos from '../../../hooks/useRepos';
-import Icon from 'react-native-vector-icons/Ionicons';
 import SelectableRepositoryList from './SelectableRepositoryList';
 import ErrorText from '../../ErrorText';
 import FlexView from '../../FlexView';
 import BlurredText from '../../BlurredText';
 import ExitButton from '../../ExitButton';
+import ReceivedMessagesButton from '../../ReceivedMessagesButton';
 
 import {
   SafeAreaView,
   View,
   Text,
   ImageBackground,
-  TouchableOpacity,
   StyleSheet
 } from 'react-native';
 
@@ -28,13 +27,7 @@ export default function LoggedDevScreen({ navigation }) {
           imageStyle={styles.image}
           source={{uri: dev.avatar_url}}
         >
-          <TouchableOpacity 
-            style={styles.chatButton} 
-            onPress={() => navigation.navigate('ReceivedMessagesScreen')}
-          >
-            <Icon style={styles.chatIcon} name="md-chatboxes" size={25} />
-          </TouchableOpacity>
-
+          <ReceivedMessagesButton style={styles.chatButton} navigation={navigation}/>
           <ExitButton style={styles.exitButton} navigation={navigation} />
         </ImageBackground>
 
@@ -44,10 +37,6 @@ export default function LoggedDevScreen({ navigation }) {
           <Text>{dev.bio || "No bio provided."}</Text>
         </View>
       </View>
-
-      <BlurredText style={styles.dataAdvice}>
-        Data taken from github.
-      </BlurredText>
 
       {repoError 
         ? <FlexView><ErrorText>Error: {repoError}</ErrorText></FlexView>
@@ -83,17 +72,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   chatButton : {
-    backgroundColor: '#000',
-    borderRadius: 5,
-    padding: 5,
-    margin: 10,
-    borderWidth: 1,
-    borderColor: '#fff',
-    alignItems: 'center',
     alignSelf: 'flex-end',    
-  },
-  chatIcon: {
-    color: '#fff',
   },
   exitButton: {
     alignSelf: 'flex-end',

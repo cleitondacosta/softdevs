@@ -1,35 +1,24 @@
 import React from 'react';
 import RepositoryList from './RepositoryList';
 import useDevSample from '../../../hooks/useDevSample';
-import Icon from 'react-native-vector-icons/Ionicons';
 import GreyText from '../../GreyText';
+import ReceivedMessagesButton from '../../ReceivedMessagesButton';
 import { 
   SafeAreaView,
   Text, 
   StyleSheet,
   Image,
-  TouchableOpacity
 } from 'react-native';
 
-export default function DevProfileScreen(props) {
+export default function DevProfileScreen({ navigation }) {
   const dev = useDevSample()[0];
-
-  function handlePress() {
-    props.navigation.navigate('ChatScreen');
-  }
 
   return (
     <SafeAreaView style={styles.container}>
       <Image style={styles.image} source={{uri: dev.image}} />
       <Text style={styles.name}>{dev.name}</Text>
       <GreyText style={styles.username}>{dev.username}</GreyText>
-
-      <TouchableOpacity onPress={handlePress} style={styles.chatButton}>
-        <Text style={styles.chatButtonText}>
-          <Icon name="ios-chatboxes" size={20} />
-        </Text>
-      </TouchableOpacity>
-
+      <ReceivedMessagesButton style={styles.chatButton} navigation={navigation} />
       <RepositoryList repositories={dev.repositories} />
     </SafeAreaView>
   );
@@ -56,17 +45,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   chatButton: {
-    marginTop: 10,
-    height: 25,
-    width: 60,
     alignSelf: 'center',
-    borderRadius: 10,
-    justifyContent: 'center',
-    backgroundColor: '#111',
-  },
-  chatButtonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold',
   },
 });
