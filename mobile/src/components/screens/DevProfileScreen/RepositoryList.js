@@ -16,6 +16,6 @@ const styles = StyleSheet.create({
   container: {
     borderTopWidth: 1,
     borderColor: "#eee",
-    marginTop: 30,
+    marginTop: 10,
   }
 });
