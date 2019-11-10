@@ -17,7 +17,7 @@ export default function AuthLoadingScreen({ navigation }) {
         if(isDev)
           navigation.navigate('LoggedDevScreen', { dev: user });
         else
-          navigation.navigate('DevsScreen');
+          navigation.navigate('LoggedCompanyScreen', { company: user });
       }
     }
 

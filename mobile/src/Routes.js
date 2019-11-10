@@ -3,7 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import AuthLoadingScreen from './components/screens/AuthLoadingScreen';
 import LoginScreen from './components/screens/LoginScreen';
-import DevsScreen from './components/screens/DevsScreen';
+import LoggedCompanyScreen from './components/screens/LoggedCompanyScreen';
 import DevProfileScreen from './components/screens/DevProfileScreen';
 import LoggedDevScreen from './components/screens/LoggedDevScreen';
 import ChatScreen from './components/screens/ChatScreen';
@@ -17,7 +17,7 @@ const devStack = createStackNavigator({
 );
 
 const companyStack = createStackNavigator({
-    DevsScreen,
+    LoggedCompanyScreen,
     DevProfileScreen,
     ChatScreen,
     ReceivedMessagesScreen,

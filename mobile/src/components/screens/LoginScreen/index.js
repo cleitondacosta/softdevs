@@ -22,6 +22,11 @@ export default function LoginScreen({ navigation }) {
         user
       }));
 
+      await AsyncStorage.setItem('loggedUser', JSON.stringify({
+        isDev: true, 
+        user
+      }));
+
       navigation.navigate('LoggedDevScreen', { dev: user });
     }
     else {
@@ -30,7 +35,12 @@ export default function LoginScreen({ navigation }) {
   }
 
   async function handleLoginAsCompany() {
-    navigation.navigate('DevsScreen');
+    await AsyncStorage.setItem('loggedUser', JSON.stringify({
+      isDev: false, 
+      user: login
+    }));
+
+    navigation.navigate('LoggedCompanyScreen', { company: login });
   }
 
   return (

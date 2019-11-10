@@ -29,9 +29,5 @@ export default function DevList(props) {
 const styles = StyleSheet.create({
   list: {
     flex: 1,
-    borderWidth: 2,
-    margin: 10,
-    borderColor: '#666',
-    borderRadius: 10,
   },
 });

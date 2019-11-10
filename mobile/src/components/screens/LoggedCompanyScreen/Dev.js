@@ -2,20 +2,20 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import GreyText from '../../GreyText';
 
-export default function Dev(props) {
+export default function Dev({navigation, image, username, name, bio}) {
   function handlePress() {
-    props.navigation.navigate('DevProfileScreen', props);
+    navigation.navigate('DevProfileScreen');
   }
 
   return (
     <TouchableOpacity onPress={handlePress} style={styles.rootView}>
-      <Image style={styles.userImage} source={{uri: props.image}} />
+      <Image style={styles.image} source={{uri: image}} />
       <View>
         <Text style={styles.userName}>
-          {props.name} ({props.username})
+          {name} ({username})
         </Text>
 
-        <GreyText>{props.bio}</GreyText>
+        <GreyText>{bio}</GreyText>
       </View>
     </TouchableOpacity>
   );
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 5,
   },
-  userImage: {
+  image: {
     width: 65,
     height: 65,
     margin: 5,
