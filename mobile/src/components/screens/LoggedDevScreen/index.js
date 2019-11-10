@@ -5,6 +5,7 @@ import SelectableRepositoryList from './SelectableRepositoryList';
 import ErrorText from '../../ErrorText';
 import FlexView from '../../FlexView';
 import BlurredText from '../../BlurredText';
+import ExitButton from '../../ExitButton';
 
 import {
   SafeAreaView,
@@ -27,9 +28,14 @@ export default function LoggedDevScreen({ navigation }) {
           imageStyle={styles.image}
           source={{uri: dev.avatar_url}}
         >
-          <TouchableOpacity onPress={() => navigation.navigate('ReceivedMessagesScreen')}>
-            <Icon style={styles.chatIcon} name="ios-chatboxes" size={25} />
+          <TouchableOpacity 
+            style={styles.chatButton} 
+            onPress={() => navigation.navigate('ReceivedMessagesScreen')}
+          >
+            <Icon style={styles.chatIcon} name="md-chatboxes" size={25} />
           </TouchableOpacity>
+
+          <ExitButton style={styles.exitButton} navigation={navigation} />
         </ImageBackground>
 
         <View>
@@ -76,13 +82,22 @@ const styles = StyleSheet.create({
   username: {
     marginBottom: 10,
   },
-  chatIcon: {
-    alignSelf: 'flex-end',    
-    margin: 10,
-    color: '#fff',
+  chatButton : {
     backgroundColor: '#000',
     borderRadius: 5,
     padding: 5,
+    margin: 10,
+    borderWidth: 1,
+    borderColor: '#fff',
+    alignItems: 'center',
+    alignSelf: 'flex-end',    
+  },
+  chatIcon: {
+    color: '#fff',
+  },
+  exitButton: {
+    alignSelf: 'flex-end',
+    marginBottom: 45,
   },
   dataAdvice: {
     textAlign: 'center',
