@@ -1,14 +1,6 @@
-const express = require('express');
-const cors = require('cors');
-const routes = require('./routes');
+const api = require('./api');
+const database = require('./database');
 
-const app = express();
+const dbUrl = 'mongodb://localhost:27017/softdevs';
 
-app.use(cors());
-app.use(express.json());
-
-app.use(routes);
-
-app.listen(8080, () => {
-  console.log(`Listening on port 8080.`)
-});
+database.connect(dbUrl, () => api.init(8080));
