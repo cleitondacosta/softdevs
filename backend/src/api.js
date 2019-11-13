@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const routes = require('./routes');
 
-function configureApi() {
+function configure() {
   const app = express();
 
   app.use(cors());
@@ -14,8 +14,8 @@ function configureApi() {
 }
 
 function init(port) {
-  const app = configureApi();
-  app.listen(port, () => console.log(`Listening on port 8080.`));
+  const app = configure();
+  app.listen(port, () => console.log(`Api listening on port ${port}.`));
 }
 
 module.exports = { init };
