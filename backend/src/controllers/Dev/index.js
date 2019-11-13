@@ -1,12 +1,20 @@
 const DevModel = require('../../models/Dev');
 
 async function store(req, res) {
-  const { login } = req.body;
-  const newDev = await DevModel.create({ login });
+  try {
+    const { login } = req.body;
+    const dev = await DevModel.findOneAndUpdate(
+      { login }, 
+      { login }, 
+      { new: true, upsert: true }
+    );
 
-  console.log(`New dev created: ${login}`);
-
-  return res.json(newDev);
+    return res.json(dev);
+  }
+  catch(err) {
+    console.error(`Error: ${err.message}`);
+    return res.status(500).json({ error: err.message });
+  }
 }
 
 module.exports = { store };

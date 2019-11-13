@@ -4,6 +4,7 @@ function connect(dbUrl, onConnect) {
   const dbConfig = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   };
 
   console.log("Connecting to database ...");
