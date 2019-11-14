@@ -22,11 +22,6 @@ export default function LoginScreen({ navigation }) {
         user
       }));
 
-      await AsyncStorage.setItem('loggedUser', JSON.stringify({
-        isDev: true, 
-        user
-      }));
-
       navigation.navigate('LoggedDevScreen', { dev: user });
     }
     else {
