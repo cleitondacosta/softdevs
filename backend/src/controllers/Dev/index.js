@@ -2,10 +2,11 @@ const DevModel = require('../../models/Dev');
 
 async function store(req, res) {
   try {
-    const { login } = req.body;
+    const { login, reposMarkedAsPublic } = req.body;
+
     const dev = await DevModel.findOneAndUpdate(
       { login }, 
-      { login }, 
+      { login, reposMarkedAsPublic }, 
       { new: true, upsert: true }
     );
 
