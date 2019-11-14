@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { getUser } from '../../../services/githubUserUtils';
+import { loginAsDev } from '../../../services/backend';
 
 export default function LoginScreen({ navigation }) {
   const [login, setLogin] = useState('');
@@ -16,7 +17,15 @@ export default function LoginScreen({ navigation }) {
   async function handleLoginAsDev() {
     const user = await getUser(login);
 
-    if(user) {
+    if(!user)
+      return Alert.alert('Error', `Could not found GitHub user "${login}"`);
+
+    try {
+      const { reposMarkedAsPublic } = await loginAsDev(login);
+      user.reposMarkedAsPublic = reposMarkedAsPublic || [];
+
+      console.log(user);
+
       await AsyncStorage.setItem('loggedUser', JSON.stringify({
         isDev: true, 
         user
@@ -24,8 +33,8 @@ export default function LoginScreen({ navigation }) {
 
       navigation.navigate('LoggedDevScreen', { dev: user });
     }
-    else {
-      Alert.alert('Error', `Could not found "${login}"`);
+    catch(err) {
+      Alert.alert('Error', err.message);
     }
   }
 
