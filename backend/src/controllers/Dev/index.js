@@ -1,21 +1,37 @@
 const DevModel = require('../../models/Dev');
 
+function handleError(err, res) {
+    console.error(`Error: ${err.message}`);
+    return res.status(500).json({ error: 'Internal server error.' });
+}
+
 async function store(req, res) {
   try {
     const { login, reposMarkedAsPublic } = req.body;
 
-    const dev = await DevModel.findOneAndUpdate(
-      { login }, 
-      { login, reposMarkedAsPublic }, 
-      { new: true, upsert: true }
-    );
+    const exists = await DevModel.findOne({ login });
 
-    return res.json(dev);
+    if(exists) {
+      return res.json(exists);
+    }
+    else {
+      const newDev = await DevModel.create({ login, reposMarkedAsPublic });
+      return res.json(newDev);
+    }
   }
   catch(err) {
-    console.error(`Error: ${err.message}`);
-    return res.status(500).json({ error: 'Internal server error.' });
+    return handleError(err, res);
   }
 }
 
-module.exports = { store };
+async function deleteAll(req, res) {
+  try {
+    await DevModel.deleteMany({});
+    return res.json({ message: 'All users deleted.' });
+  }
+  catch(err) {
+    return handleError(err, res);
+  }
+}
+
+module.exports = { store, deleteAll };
