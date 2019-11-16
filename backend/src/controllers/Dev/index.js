@@ -34,4 +34,32 @@ async function deleteAll(req, res) {
   }
 }
 
-module.exports = { store, deleteAll };
+async function update(req, res) {
+  try {
+    const { user } = req.headers;
+    const { 
+      login: newLogin, 
+      reposMarkedAsPublic: newReposMarkedAsPublic 
+    } = req.body;
+
+    const dev = await DevModel.findOne({ login: user });
+
+    if(!dev)
+      return res.status(404).json({ error: 'User not found' });
+
+    if(newLogin)
+      dev.login = newLogin;
+
+    if(newReposMarkedAsPublic)
+      dev.reposMarkedAsPublic = newReposMarkedAsPublic;
+
+    await dev.save();
+
+    return res.json({ message: 'OK' });
+  }
+  catch(err) {
+    return handleError(err, res);
+  }
+}
+
+module.exports = { store, update, deleteAll };
