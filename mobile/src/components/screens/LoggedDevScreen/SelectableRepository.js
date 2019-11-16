@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Switch } from 'react-native';
 import Repository from '../../Repository';
 
-export default function SelectableRepository(props) {
-  const [SwitchValue, setSwitchValue] = useState(false);
-
+export default function SelectableRepository({ repository }) {
   return (
     <View style={{flexDirection: 'row'}}>
       <Switch 
         style={{alignSelf: 'center'}}
-        onValueChange={value => setSwitchValue(value)} 
-        value={SwitchValue} 
+        value={repository.isMarkedAsPublic} 
       />
-      <Repository repository={props.repository} />
+      <Repository repository={repository} />
     </View>
   );
 }

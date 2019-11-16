@@ -17,7 +17,7 @@ import {
 
 export default function LoggedDevScreen({ navigation }) {
   const dev = navigation.getParam('dev', undefined);
-  const { repositories, repoError } = useRepos(dev.login);
+  const { repositories, repoError } = useRepos(dev);
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -57,9 +57,11 @@ const styles = StyleSheet.create({
   },
   imageOuterContainer: {
     flexDirection: 'column-reverse',
+    justifyContent: 'space-between',
     height: 150,
     width: 150,
     marginRight: 15,
+    padding: 10,
   },
   image: {
     borderRadius: 20,
@@ -76,10 +78,5 @@ const styles = StyleSheet.create({
   },
   exitButton: {
     alignSelf: 'flex-end',
-    marginBottom: 45,
-  },
-  dataAdvice: {
-    textAlign: 'center',
-    marginTop: 25,
   },
 });

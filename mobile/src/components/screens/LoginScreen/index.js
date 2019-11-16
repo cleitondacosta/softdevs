@@ -24,8 +24,6 @@ export default function LoginScreen({ navigation }) {
       const { reposMarkedAsPublic } = await loginAsDev(login);
       user.reposMarkedAsPublic = reposMarkedAsPublic || [];
 
-      console.log(user);
-
       await AsyncStorage.setItem('loggedUser', JSON.stringify({
         isDev: true, 
         user
