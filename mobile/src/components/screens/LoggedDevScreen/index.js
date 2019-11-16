@@ -17,7 +17,7 @@ import {
 
 export default function LoggedDevScreen({ navigation }) {
   const dev = navigation.getParam('dev', undefined);
-  const { repositories, repoError } = useRepos(dev);
+  const { repositories, handleRepoToggle, repoError } = useRepos(dev);
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -40,9 +40,11 @@ export default function LoggedDevScreen({ navigation }) {
 
       {repoError 
         ? <FlexView><ErrorText>Error: {repoError}</ErrorText></FlexView>
-        : <SelectableRepositoryList repositories={repositories} />
+        : <SelectableRepositoryList 
+            repositories={repositories}
+            onToggle={handleRepoToggle}
+          />
       }
-
     </SafeAreaView>
   );
 }
