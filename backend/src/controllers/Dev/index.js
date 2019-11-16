@@ -62,4 +62,23 @@ async function update(req, res) {
   }
 }
 
-module.exports = { store, update, deleteAll };
+async function show(req, res) {
+  try {
+    const { user } = req.params;
+
+    if(!user)
+      return res.status(400).json({ error: 'Bad request.' });
+
+    const dev = await DevModel.findOne({ login: user });
+
+    if(!dev)
+      return res.status(404).json({ error: 'User not found.' });
+
+    return res.json(dev);
+  }
+  catch(err) {
+    return handleError(err, res);
+  }
+}
+
+module.exports = { store, update, deleteAll, show };
