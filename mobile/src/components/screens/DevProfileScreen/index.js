@@ -1,6 +1,9 @@
 import React from 'react';
+import usePublicRepos from '../../../hooks/usePublicRepos';
 import RepositoryList from './RepositoryList';
 import GreyText from '../../GreyText';
+import FlexView from '../../FlexView';
+import ErrorText from '../../ErrorText';
 import ReceivedMessagesButton from '../../ReceivedMessagesButton';
 import { 
   SafeAreaView,
@@ -11,6 +14,7 @@ import {
 
 export default function DevProfileScreen({ navigation }) {
   const dev = navigation.getParam('dev', null);
+  const { repositories, fetchError } = usePublicRepos(dev.login);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -18,7 +22,11 @@ export default function DevProfileScreen({ navigation }) {
       <Text style={styles.name}>{dev.name}</Text>
       <GreyText style={styles.username}>{dev.login}</GreyText>
       <ReceivedMessagesButton style={styles.chatButton} navigation={navigation} />
-      <RepositoryList repositories={dev.repositories} />
+
+      {fetchError 
+        ? <FlexView><ErrorText>{fetchError}</ErrorText></FlexView>
+        : <RepositoryList repositories={repositories} />
+      }
     </SafeAreaView>
   );
 }
