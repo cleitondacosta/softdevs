@@ -53,3 +53,13 @@ export async function getDev(login) {
     throw err;
   }
 }
+
+export async function getDevs() {
+  try {
+    const response = await api.get('/devs');
+    return response.data;
+  }
+  catch(err) {
+    throw err;
+  }
+}

@@ -1,12 +1,14 @@
 import React from 'react';
 import DevList from './DevList';
-import useDevSample from '../../../hooks/useDevSample';
+import useDevs from '../../../hooks/useDevs';
 import ExitButton from '../../ExitButton';
+import FlexView from '../../FlexView';
+import ErrorText from '../../ErrorText';
 import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
 
 export default function LoggedCompanyScreen({ navigation }) {
   const loggedCompanyName = navigation.getParam('company', undefined);
-  const devs = useDevSample();
+  const { devs, fetchError } = useDevs();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -15,7 +17,10 @@ export default function LoggedCompanyScreen({ navigation }) {
         <Text style={styles.company}>{loggedCompanyName}</Text>
       </View>
 
-      <DevList devs={devs} navigation={navigation} />
+      {fetchError
+        ? <FlexView><ErrorText>{fetchError}</ErrorText></FlexView>
+        : <DevList devs={devs} navigation={navigation} />
+      }
     </SafeAreaView>
   );
 }

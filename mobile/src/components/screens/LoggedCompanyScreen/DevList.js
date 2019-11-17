@@ -2,23 +2,22 @@ import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import Dev from './Dev';
 
-export default function DevList(props) {
+export default function DevList({ devs, navigation }) {
   function renderDev(dev) {
     return (
       <Dev
-        image={dev.image}
+        image={dev.avatar_url}
         name={dev.name}
-        username={dev.username}
+        username={dev.login}
         bio={dev.bio}
-        repositories={dev.repositories}
-        navigation={props.navigation}
+        navigation={navigation}
       />
     );
   }
 
   return (
     <FlatList
-      data={props.devs}
+      data={devs}
       renderItem={({item}) => renderDev(item)}
       keyExtractor={(item) => item.username}
       style={styles.list}
