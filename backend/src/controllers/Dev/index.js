@@ -81,4 +81,14 @@ async function show(req, res) {
   }
 }
 
-module.exports = { store, update, deleteAll, show };
+async function index(req, res) {
+  try {
+    const devs = await DevModel.find({});
+    return res.json(devs);
+  }
+  catch(err) {
+    return handleError(err, res);
+  }
+}
+
+module.exports = { store, update, deleteAll, show, index };
