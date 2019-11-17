@@ -1,6 +1,5 @@
 import React from 'react';
 import RepositoryList from './RepositoryList';
-import useDevSample from '../../../hooks/useDevSample';
 import GreyText from '../../GreyText';
 import ReceivedMessagesButton from '../../ReceivedMessagesButton';
 import { 
@@ -11,13 +10,13 @@ import {
 } from 'react-native';
 
 export default function DevProfileScreen({ navigation }) {
-  const dev = useDevSample()[0];
+  const dev = navigation.getParam('dev', null);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image style={styles.image} source={{uri: dev.image}} />
+      <Image style={styles.image} source={{uri: dev.avatar_url}} />
       <Text style={styles.name}>{dev.name}</Text>
-      <GreyText style={styles.username}>{dev.username}</GreyText>
+      <GreyText style={styles.username}>{dev.login}</GreyText>
       <ReceivedMessagesButton style={styles.chatButton} navigation={navigation} />
       <RepositoryList repositories={dev.repositories} />
     </SafeAreaView>

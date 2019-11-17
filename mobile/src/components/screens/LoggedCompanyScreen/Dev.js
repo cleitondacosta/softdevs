@@ -2,20 +2,20 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import GreyText from '../../GreyText';
 
-export default function Dev({navigation, image, username, name, bio}) {
+export default function Dev({navigation, dev}) {
   function handlePress() {
-    navigation.navigate('DevProfileScreen');
+    navigation.navigate('DevProfileScreen', { dev });
   }
 
   return (
     <TouchableOpacity onPress={handlePress} style={styles.rootView}>
-      <Image style={styles.image} source={{uri: image}} />
+      <Image style={styles.image} source={{uri: dev.avatar_url}} />
       <View>
         <Text style={styles.userName}>
-          {name} ({username})
+          {dev.name} ({dev.login})
         </Text>
 
-        <GreyText>{bio}</GreyText>
+        <GreyText>{dev.bio}</GreyText>
       </View>
     </TouchableOpacity>
   );
