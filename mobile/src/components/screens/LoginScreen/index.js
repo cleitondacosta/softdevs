@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { getUser } from '../../../services/githubUserUtils';
-import { loginAsDev } from '../../../services/backend';
+import { loginAsDev, loginAsCompany } from '../../../services/backend';
 
 export default function LoginScreen({ navigation }) {
   const [login, setLogin] = useState('');
@@ -37,12 +37,19 @@ export default function LoginScreen({ navigation }) {
   }
 
   async function handleLoginAsCompany() {
-    await AsyncStorage.setItem('loggedUser', JSON.stringify({
-      isDev: false, 
-      user: login
-    }));
+    try {
+      await loginAsCompany(login);
 
-    navigation.navigate('LoggedCompanyScreen', { company: login });
+      await AsyncStorage.setItem('loggedUser', JSON.stringify({
+        isDev: false, 
+        user: login
+      }));
+
+      navigation.navigate('LoggedCompanyScreen', { company: login });
+    }
+    catch(err) {
+      Alert.alert('Error', err.message);
+    }
   }
 
   return (
