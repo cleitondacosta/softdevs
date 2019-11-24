@@ -2,9 +2,9 @@ import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function ReceivedMessagesButton({ style, navigation }) {
+export default function ReceivedMessagesButton({ style, navigation, loggedUser }) {
   function handlePress() {
-    navigation.navigate('ReceivedMessagesScreen');
+    navigation.navigate('ReceivedMessagesScreen', { loggedUser });
   }
 
   return (

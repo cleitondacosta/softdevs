@@ -2,12 +2,14 @@ import React from 'react';
 import ReceivedMessage from './ReceivedMessage';
 import { FlatList } from 'react-native';
 
-export default function ReceivedMessageList({navigation, messages}) {
+export default function ReceivedMessageList({navigation, socket, messages, loggedUser}) {
   function renderReceivedMessage(receivedMessage) {
     return (
       <ReceivedMessage
+        socket={socket}
         navigation={navigation}
-        sender={receivedMessage.sender}
+        chattingWith={receivedMessage.sender}
+        loggedUser={loggedUser}
         messagePreview={receivedMessage.lastMessage}
         hasNew={receivedMessage.isNew}
       />

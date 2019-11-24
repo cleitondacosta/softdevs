@@ -12,7 +12,7 @@ import {
   View,
   Text,
   ImageBackground,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 
 export default function LoggedDevScreen({ navigation }) {
@@ -27,7 +27,11 @@ export default function LoggedDevScreen({ navigation }) {
           imageStyle={styles.image}
           source={{uri: dev.avatar_url}}
         >
-          <ReceivedMessagesButton style={styles.chatButton} navigation={navigation}/>
+          <ReceivedMessagesButton 
+            loggedUser={dev.login}
+            style={styles.chatButton} 
+            navigation={navigation}
+          />
           <ExitButton style={styles.exitButton} navigation={navigation} />
         </ImageBackground>
 

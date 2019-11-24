@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function ChatHeader({ receiverName, senderName }) {
+export default function ChatHeader({ loggedUser, chattingWith }) {
   return (
     <View style={styles.header}>
-        <Text style={styles.name}>{senderName}</Text>
+        <Text style={styles.name}>{loggedUser}</Text>
         <Text>
-          chatting with: <Text style={styles.name}>{receiverName}</Text>
+          chatting with: <Text style={styles.name}>{chattingWith}</Text>
         </Text>
     </View>
   );

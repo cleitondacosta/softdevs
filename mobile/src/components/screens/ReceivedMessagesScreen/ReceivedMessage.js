@@ -8,18 +8,18 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default function ReceivedMessage({navigation, sender, messagePreview, hasNew}) {
+export default function ReceivedMessage({navigation, chattingWith, loggedUser, socket, messagePreview, hasNew}) {
   function limitString(str, max) {
    return str.slice(0, max) + '...';
   }
 
   function handlePress() {
-    navigation.navigate('ChatScreen');
+    navigation.navigate('ChatScreen', { socket, loggedUser, chattingWith });
   }
   
   return (
     <TouchableOpacity onPress={handlePress} style={styles.container}>
-      <Text style={styles.sender}>{sender}</Text>
+      <Text style={styles.chattingWith}>{chattingWith}</Text>
       <View style={styles.previewContainer}>
         {hasNew && (
           <Icon style={styles.newMessageIcon} name="md-alert" size={14} />
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
     borderBottomWidth: 1,
   },
-  sender: {
+  chattingWith: {
     fontSize: 20,
   },
   previewContainer: {

@@ -1,36 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ChatHeader from './ChatHeader';
 import MessageList from './MessageList';
-import useDevSample from '../../../hooks/useDevSample';
-import useChatSample from '../../../hooks/useChatSample';
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   SafeAreaView,
   View,
   TouchableOpacity,
   TextInput,
+  Alert,
   StyleSheet
 } from 'react-native';
 
-export default function ChatScreen() {
-  const dev = useDevSample()[0];
+
+export default function ChatScreen({ navigation }) {
+  const socket = navigation.getParam('socket', undefined);
+  const loggedUser = navigation.getParam('loggedUser', undefined);
+  const chattingWith = navigation.getParam('chattingWith', undefined);
   const [chatInputValue, setChatInputValue] = useState('');
-  const [chatHistory, setChatHistory] = useState(useChatSample());
+  const [chatHistory, setChatHistory] = useState([]);
 
-  function handleSend() {
-    const newMessage = { 
-      text: chatInputValue,
-      date: 'date',
-      alignSelf: 'flex-end',
-    };
+  useEffect(() => {
+    async function fetchChatHistoryFromStorate() {
+      const stringChatHistory = await AsyncStorage.getItem('chatHistory');
 
-    setChatHistory([...chatHistory, newMessage]);
-    setChatInputValue('');
+      if(stringChatHistory) {
+        const chatHistoryAsJson = JSON.parse(stringChatHistory);
+        setChatHistory(chatHistoryAsJson);
+      }
+    }
+
+    fetchChatHistoryFromStorate();
+  }, []);
+
+  async function handleSend() {
+    try {
+      const newMessage = {
+        text: chatInputValue.trim(),
+        date: 'date',
+        from: loggedUser,
+        to: chattingWith,
+        alignSelf: 'flex-end',
+      };
+
+      socket.emit('message', newMessage);
+      setChatInputValue('');
+      setChatHistory([...chatHistory, newMessage]);
+
+      await AsyncStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+    }
+    catch(err) {
+      Alert.alert('Error', err.message);
+    }
   }
 
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <ChatHeader receiverName={dev.username} senderName="company1" />
+      <ChatHeader loggedUser={loggedUser} chattingWith={chattingWith} />
       <MessageList data={chatHistory} />
 
       <View style={styles.chatInputContainer}>
