@@ -29,6 +29,7 @@ export default function LoggedDevScreen({ navigation }) {
         >
           <ReceivedMessagesButton 
             loggedUser={dev.login}
+            userId={dev.id}
             style={styles.chatButton} 
             navigation={navigation}
           />

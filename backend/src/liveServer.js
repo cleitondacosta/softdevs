@@ -1,13 +1,36 @@
+const redis = require('redis');
+
+const redisClient = redis.createClient();
+const ONE_HOUR = 3600;
+
+redisClient.on('error', err => {
+  throw err;
+});
+
 function handleConnection(socket) {
   console.log('User connected.');
 
-  socket.on('disconnect', handleDisconnect(socket));
+  const { userId } = socket.handshake.query;
+
+  redisClient.setex(userId, ONE_HOUR, socket.id, (err, reply) => {
+    if(err) {
+      console.error(`Redis error: ${err.message}`);
+    }
+  });
+
+  socket.on('disconnect', handleDisconnect(userId, socket));
   socket.on('message', handleMessage(socket));
 }
 
-function handleDisconnect(socket) {
+function handleDisconnect(userId, socket) {
   return () => {
-    console.log('Disconnected.');
+    console.log('User disconnected.');
+
+    redisClient.del(userId, (err, reply) => {
+      if(err) {
+        console.error(`Redis error: ${err.message}`);
+      }
+    });
   }
 }
 

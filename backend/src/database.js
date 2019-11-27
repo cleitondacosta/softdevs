@@ -1,27 +1,28 @@
 const mongoose = require('mongoose');
+const redis = require('redis');
 
-function connect(dbUrl, onConnect) {
-  const dbConfig = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  };
+module.exports = {
+  connectToMongo(dbUrl, onConnect) {
+    const dbConfig = {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    };
 
-  console.log("Connecting to database ...");
+    console.log("Connecting to database ...");
 
-  mongoose.connect(dbUrl, dbConfig)
-    .catch(err => console.error(err));
+    mongoose.connect(dbUrl, dbConfig)
+      .catch(err => console.error(err));
 
-  const connection = mongoose.connection;
+    const connection = mongoose.connection;
 
-  connection.on('open', () => {
-    console.log('Connection established.');
-    onConnect();
-  });
+    connection.on('open', () => {
+      console.log('Connection established.');
+      onConnect();
+    });
 
-  connection.on('error', err => { 
-    throw err;
-  });
+    connection.on('error', err => { 
+      throw err;
+    });
+  },
 }
-
-module.exports = { connect };
