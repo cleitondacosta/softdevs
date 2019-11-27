@@ -13,8 +13,7 @@ import {
 export default function ReceivedMessagesScreen({ navigation }) {
   const messages = useReceivedMessagesSample();
   const loggedUser = navigation.getParam('loggedUser', undefined);
-  const userId = navigation.getParam('userId', undefined);
-  const { socket, error } = useSocketIO(userId);
+  const { socket, error } = useSocketIO(loggedUser);
 
   useEffect(() => () => socket && socket.close(), []);
 

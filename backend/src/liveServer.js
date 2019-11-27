@@ -5,23 +5,23 @@ async function handleConnection(socket) {
   try {
     console.log('User connected.');
 
-    const { userId } = socket.handshake.query;
+    const { username } = socket.handshake.query;
 
-    await redisSetex(userId, ONE_HOUR, socket.id);
+    await redisSetex(username, ONE_HOUR, socket.id);
 
-    socket.on('disconnect', handleDisconnect(userId, socket));
-    socket.on('message', handleMessage(userId, socket));
+    socket.on('disconnect', handleDisconnect(username, socket));
+    socket.on('message', handleMessage(username, socket));
   }
   catch(err) {
     logRedisError(err);
   }
 }
 
-function handleDisconnect(userId, socket) {
+function handleDisconnect(username, socket) {
   return async () => {
     try {
       console.log('User disconnected.');
-      await redisDel(userId);
+      await redisDel(username);
     }
     catch(err) {
       logRedisError(err);
@@ -29,7 +29,7 @@ function handleDisconnect(userId, socket) {
   }
 }
 
-function handleMessage(userId, socket) {
+function handleMessage(username, socket) {
   return message => {
     console.log(message);
   }
