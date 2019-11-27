@@ -1,41 +1,36 @@
-const redis = require('redis');
-
-const redisClient = redis.createClient();
+const { redisSetex, redisGet, redisDel, logRedisError } = require('./redis');
 const ONE_HOUR = 3600;
 
-redisClient.on('error', err => {
-  throw err;
-});
+async function handleConnection(socket) {
+  try {
+    console.log('User connected.');
 
-function handleConnection(socket) {
-  console.log('User connected.');
+    const { userId } = socket.handshake.query;
 
-  const { userId } = socket.handshake.query;
+    await redisSetex(userId, ONE_HOUR, socket.id);
 
-  redisClient.setex(userId, ONE_HOUR, socket.id, (err, reply) => {
-    if(err) {
-      console.error(`Redis error: ${err.message}`);
-    }
-  });
-
-  socket.on('disconnect', handleDisconnect(userId, socket));
-  socket.on('message', handleMessage(socket));
-}
-
-function handleDisconnect(userId, socket) {
-  return () => {
-    console.log('User disconnected.');
-
-    redisClient.del(userId, (err, reply) => {
-      if(err) {
-        console.error(`Redis error: ${err.message}`);
-      }
-    });
+    socket.on('disconnect', handleDisconnect(userId, socket));
+    socket.on('message', handleMessage(userId, socket));
+  }
+  catch(err) {
+    logRedisError(err);
   }
 }
 
-function handleMessage(socket) {
-  return (message) => {
+function handleDisconnect(userId, socket) {
+  return async () => {
+    try {
+      console.log('User disconnected.');
+      await redisDel(userId);
+    }
+    catch(err) {
+      logRedisError(err);
+    }
+  }
+}
+
+function handleMessage(userId, socket) {
+  return message => {
     console.log(message);
   }
 }
