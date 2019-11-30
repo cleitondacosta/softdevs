@@ -3,14 +3,13 @@ const ONE_HOUR = 3600;
 
 async function handleConnection(socket) {
   try {
-    console.log('User connected.');
-
     const { username } = socket.handshake.query;
+    console.log(`User connected: ${username}`);
 
     await redisSetex(username, ONE_HOUR, socket.id);
 
     socket.on('disconnect', handleDisconnect(username, socket));
-    socket.on('message', handleMessage(username, socket));
+    socket.on('message', handleMessage(socket));
   }
   catch(err) {
     logRedisError(err);
@@ -20,8 +19,8 @@ async function handleConnection(socket) {
 function handleDisconnect(username, socket) {
   return async () => {
     try {
-      console.log('User disconnected.');
       await redisDel(username);
+      console.log(`User ${username} disconnected.`);
     }
     catch(err) {
       logRedisError(err);
@@ -29,9 +28,22 @@ function handleDisconnect(username, socket) {
   }
 }
 
-function handleMessage(username, socket) {
-  return message => {
-    console.log(message);
+function handleMessage(socket) {
+  return async message => {
+    try {
+      const receiver = await redisGet(message.to);
+      console.log(`New message from ${message.from} for ${receiver}.`)
+
+      // Online
+      if(receiver)
+        socket.to(receiver).emit('incoming message', message);
+      // Offline
+      else
+        console.log('User is offline. Nothing done.');
+    }
+    catch(err) {
+      console.error(`Handle message error: ${err.message}`);
+    }
   }
 }
 

@@ -5,7 +5,7 @@ export default function useSocketIO(username) {
   let socket;
   let error;
 
-  console.log(`User id: ${userId}`);
+  console.log(`User id: ${username}`);
 
   try {
     socket = socketIOClient(`http://${ipAdress}:${port}`, { query: { username } });

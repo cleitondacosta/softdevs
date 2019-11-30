@@ -21,6 +21,12 @@ export default function ChatScreen({ navigation }) {
   const [chatHistory, setChatHistory] = useState([]);
 
   useEffect(() => {
+    socket.on('incoming message', message => {
+      setChatHistory([...chatHistory, message]);
+    });
+  }, []);
+
+  useEffect(() => {
     async function fetchChatHistoryFromStorate() {
       const stringChatHistory = await AsyncStorage.getItem('chatHistory');
 
